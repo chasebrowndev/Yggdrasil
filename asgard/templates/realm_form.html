@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %} — {{ action }} Realm{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h2>{{ action }} realm</h2>
+    <p class="page-sub">{{ 'Edit existing realm card' if realm else 'Add a new realm to Midgard' }}</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-sm">← Back</a>
+</div>
+
+<div class="form-card">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" value="{{ realm.name if realm else '' }}" required>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" value="{{ realm.description if realm else '' }}" required>
+    </div>
+
+    <div class="field">
+      <label for="route">Route</label>
+      <input type="text" id="route" name="route" value="{{ realm.route if realm else '/' }}" required>
+      <span class="field-hint">e.g. /svartalheim</span>
+    </div>
+
+    <div class="field">
+      <label for="sort_order">Sort order</label>
+      <input type="number" id="sort_order" name="sort_order" value="{{ realm.sort_order if realm else 0 }}" min="0">
+    </div>
+
+    <div class="field">
+      <label for="image">Image</label>
+      {% if realm and realm.image_path %}
+      <div class="current-img">
+        <img src="{{ realm.image_path }}" alt="Current image">
+        <span class="field-hint">Upload a new file to replace</span>
+      </div>
+      {% endif %}
+      <input type="file" id="image" name="image" accept="image/*">
+      <span class="field-hint">PNG, JPG, GIF, WebP, SVG</span>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">{{ action }}</button>
+      <a href="{{ url_for('index') }}" class="btn-ghost">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+yggdrasil.home.arpa {
+    handle /midgard* {
+        reverse_proxy localhost:5000
+    }
+
+    handle /asgard* {
+        reverse_proxy localhost:5001
+    }
+
+    handle /svartalheim* {
+        reverse_proxy localhost:5002
+    }
+
+    handle {
+        redir /midgard permanent
+    }
+}

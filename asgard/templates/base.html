@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asgard{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='asgard.css') }}">
+</head>
+<body>
+  {% if session.get('authed') %}
+  <nav>
+    <span class="nav-brand">Yggdrasil <span class="nav-realm">/ Asgard</span></span>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Realms</a>
+      <a href="{{ url_for('settings') }}" class="{{ 'active' if request.endpoint == 'settings' }}">Settings</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+  {% endif %}
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+        <div class="flash">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

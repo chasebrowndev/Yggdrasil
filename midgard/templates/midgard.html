@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yggdrasil — Midgard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='midgard.css') }}">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Yggdrasil</h1>
+      <p class="subtitle">Midgard &mdash; Home</p>
+      <div class="header-rule"></div>
+    </header>
+
+    <section class="realm-grid">
+      {% for realm in realms %}
+      <a class="realm-card" href="{{ realm.route }}">
+        <div class="card-image">
+          {% if realm.image_path %}
+          <img src="{{ realm.image_path }}" alt="{{ realm.name }}">
+          {% else %}
+          <div class="card-image-placeholder"></div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-name">{{ realm.name }}</p>
+          <div class="card-accent"></div>
+          <p class="card-desc">{{ realm.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>

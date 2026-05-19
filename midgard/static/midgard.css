@@ -1,0 +1,136 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f5f0e8;
+  --surface:   #ede8dc;
+  --border:    #c4a97a;
+  --border-hv: #6b4c2a;
+  --text-dark: #2c1a0e;
+  --text-mid:  #6b4c2a;
+  --text-mute: #9a7a58;
+  --accent:    #6b4c2a;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-dark);
+  font-family: 'Georgia', serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+}
+
+main {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.header-rule {
+  width: 48px;
+  height: 1.5px;
+  background: var(--accent);
+  margin: 0 auto;
+}
+
+.realm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.realm-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.realm-card:hover {
+  border-color: var(--border-hv);
+}
+
+.card-image {
+  width: 100%;
+  height: 120px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #d8d0be;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #d8d0be;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-name {
+  font-size: 17px;
+  font-weight: normal;
+  color: var(--text-dark);
+  letter-spacing: 0.03em;
+}
+
+.card-accent {
+  width: 22px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-mute);
+  font-family: 'Georgia', serif;
+  font-style: italic;
+}

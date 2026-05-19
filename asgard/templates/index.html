@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %} — Realms{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h2>Realms</h2>
+    <p class="page-sub">Manage Yggdrasil navigation cards</p>
+  </div>
+  <a href="{{ url_for('realm_new') }}" class="btn-primary">+ New realm</a>
+</div>
+
+{% if realms %}
+<table class="realm-table">
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Route</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in realms %}
+    <tr>
+      <td class="col-order">{{ r.sort_order }}</td>
+      <td class="col-img">
+        {% if r.image_path %}
+        <img src="{{ r.image_path }}" alt="{{ r.name }}">
+        {% else %}
+        <div class="img-placeholder"></div>
+        {% endif %}
+      </td>
+      <td class="col-name">{{ r.name }}</td>
+      <td class="col-desc">{{ r.description }}</td>
+      <td class="col-route"><code>{{ r.route }}</code></td>
+      <td class="col-actions">
+        <a href="{{ url_for('realm_edit', rid=r.id) }}" class="btn-sm">Edit</a>
+        <form method="POST" action="{{ url_for('realm_delete', rid=r.id) }}"
+              onsubmit="return confirm('Delete {{ r.name }}?')">
+          <button type="submit" class="btn-sm btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No realms yet. <a href="{{ url_for('realm_new') }}">Create one.</a></p>
+{% endif %}
+{% endblock %}
