@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- trunk -->
+  <rect x="28" y="42" width="8" height="14" rx="2" fill="#6B4226"/>
+  <!-- roots -->
+  <path d="M28 54 Q20 58 14 60" stroke="#6B4226" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M36 54 Q44 58 50 60" stroke="#6B4226" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M30 56 Q26 60 22 63" stroke="#6B4226" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M34 56 Q38 60 42 63" stroke="#6B4226" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- lower canopy -->
+  <polygon points="32,8 10,40 54,40" fill="#2D6A4F"/>
+  <!-- middle canopy -->
+  <polygon points="32,4 13,32 51,32" fill="#40916C"/>
+  <!-- upper canopy -->
+  <polygon points="32,2 18,26 46,26" fill="#52B788"/>
+  <!-- highlight -->
+  <polygon points="32,2 26,14 32,12" fill="#74C69D" opacity="0.5"/>
+</svg>

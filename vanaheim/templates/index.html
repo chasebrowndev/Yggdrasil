@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} — Recipes &amp; Guides{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h2>Vanaheim</h2>
+    <p class="page-sub">Recipes, guides &amp; knowledge</p>
+  </div>
+  <a href="{{ url_for('entry_new') }}" class="btn-primary">+ New entry</a>
+</div>
+
+{% if entries %}
+<div class="entry-grid">
+  {% for e in entries %}
+  <a class="entry-card" href="{{ url_for('entry', eid=e.id) }}">
+    <div class="card-image">
+      {% if e.image_path %}
+      <img src="{{ e.image_path }}" alt="{{ e.title }}">
+      {% else %}
+      <div class="card-image-placeholder"></div>
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <span class="card-category">{{ e.category }}</span>
+      <p class="card-name">{{ e.title }}</p>
+      <div class="card-accent"></div>
+      {% if e.description %}
+      <p class="card-desc">{{ e.description }}</p>
+      {% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">No entries yet. <a href="{{ url_for('entry_new') }}">Create one.</a></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* original palette translated to HSL */
+    --background:          37 47% 93%;   /* #f5f0e8 warm cream        */
+    --foreground:          24 52% 11%;   /* #2c1a0e dark brown        */
+    --card:                38 28% 89%;   /* #ede8dc warmer surface     */
+    --card-foreground:     24 52% 11%;
+    --border:              35 32% 74%;   /* #c4a97a-ish warm tan       */
+    --input:               35 32% 74%;
+    --ring:                27 43% 34%;
+    --primary:             27 43% 29%;   /* #6b4c2a dark brown        */
+    --primary-foreground:  37 47% 93%;   /* cream text on brown btn   */
+    --secondary:           37 22% 85%;   /* muted warm surface        */
+    --secondary-foreground:24 40% 22%;
+    --muted:               37 20% 87%;
+    --muted-foreground:    30 29% 47%;   /* #9a7a58 warm mid-brown    */
+    --accent:              37 20% 87%;
+    --accent-foreground:   24 52% 11%;
+    --destructive:         0 65% 45%;
+    --destructive-foreground: 37 47% 93%;
+    --gold:                27 43% 31%;   /* same warm brown accent    */
+    --radius:              0.75rem;
+  }
+
+  * { border-color: hsl(var(--border)); }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    background: hsl(27 43% 29% / 0.18);
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(35 32% 62%); }
+}
+
+@layer utilities {
+  .text-gold   { color: hsl(var(--gold)); }
+  .bg-gold     { background-color: hsl(var(--gold)); }
+  .border-gold { border-color: hsl(var(--gold)); }
+  .glow-gold {
+    box-shadow: 0 0 16px hsl(27 43% 29% / 0.1), 0 0 4px hsl(27 43% 29% / 0.07);
+  }
+
+  /* Prose for Markdown rendering — warm light theme */
+  .prose-warm {
+    color: hsl(var(--foreground));
+  }
+  .prose-warm h1, .prose-warm h2, .prose-warm h3 {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-warm h2 { font-size: 1.25rem; }
+  .prose-warm h3 { font-size: 1.1rem; }
+  .prose-warm p  { margin-bottom: 0.875rem; line-height: 1.75; }
+  .prose-warm ul, .prose-warm ol {
+    padding-left: 1.5rem;
+    margin-bottom: 0.875rem;
+  }
+  .prose-warm li { margin-bottom: 0.3rem; line-height: 1.7; }
+  .prose-warm ol { list-style-type: decimal; }
+  .prose-warm ul { list-style-type: disc; }
+  .prose-warm strong { color: hsl(var(--foreground)); font-weight: 600; }
+  .prose-warm em    { color: hsl(var(--muted-foreground)); }
+  .prose-warm code {
+    background: hsl(35 30% 82%);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    color: hsl(24 52% 16%);
+  }
+  .prose-warm pre {
+    background: hsl(35 25% 82%);
+    padding: 1rem 1.25rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+  .prose-warm pre code { background: none; padding: 0; }
+  .prose-warm blockquote {
+    border-left: 2px solid hsl(var(--gold));
+    padding-left: 1rem;
+    color: hsl(var(--muted-foreground));
+    font-style: italic;
+  }
+  .prose-warm hr {
+    border-color: hsl(var(--border));
+    margin: 1.5rem 0;
+  }
+}

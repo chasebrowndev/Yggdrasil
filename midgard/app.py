@@ -1,12 +1,12 @@
 import sqlite3
 import os
-from flask import Flask, render_template, g
+from flask import Flask, jsonify, g
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "yggdrasil.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "..", "yggdrasil.db")
 
-app = Flask(__name__, 
-    template_folder="templates",
-    static_folder="static")
+app = Flask(__name__,
+    static_folder="static",
+    static_url_path="/midgard/static")
 
 def get_db():
     if "db" not in g:
@@ -36,19 +36,22 @@ def init_db():
         db.executemany(
             "INSERT INTO realms (name, description, route, image_path, sort_order) VALUES (?,?,?,?,?)",
             [
-                ("Svartalheim", "File services", "/svartalheim", None, 1),
-                ("Asgard",     "System administration", "/asgard", None, 2),
+                ("Vanaheim",     "Library", "/vanaheim",     None, 1),
+                ("Svartalfheim", "Files",   "/svartalfheim", None, 2),
+                ("Bifrost",      "Network", "/bifrost",      None, 3),
+                ("Niflheim",     "Vault",   "/niflheim",     None, 4),
+                ("Asgard",       "Admin",   "/asgard",       None, 5),
             ]
         )
     db.commit()
     db.close()
 
-@app.route("/midgard")
-def midgard():
-    realms = get_db().execute(
-        "SELECT * FROM realms ORDER BY sort_order ASC, id ASC"
+@app.route("/api/realms")
+def api_realms():
+    rows = get_db().execute(
+        "SELECT * FROM realms WHERE (visible IS NULL OR visible = 1) ORDER BY sort_order ASC, id ASC"
     ).fetchall()
-    return render_template("midgard.html", realms=realms)
+    return jsonify([dict(r) for r in rows])
 
 if __name__ == "__main__":
     init_db()

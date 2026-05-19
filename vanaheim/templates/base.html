@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanaheim{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='vanaheim.css') }}">
+</head>
+<body>
+  <nav>
+    <span class="nav-brand">Yggdrasil <span class="nav-realm">/ Vanaheim</span></span>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">All entries</a>
+      <a href="{{ url_for('entry_new') }}" class="{{ 'active' if request.endpoint == 'entry_new' }}">+ New</a>
+      <a href="/midgard">← Home</a>
+    </div>
+  </nav>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+        <div class="flash">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

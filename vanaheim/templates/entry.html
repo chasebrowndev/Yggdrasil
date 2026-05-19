@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} — {{ entry.title }}{% endblock %}
+
+{% block content %}
+{% if entry.image_path %}
+<div class="entry-hero">
+  <img src="{{ entry.image_path }}" alt="{{ entry.title }}">
+</div>
+{% endif %}
+
+<div class="entry-header">
+  <div class="entry-meta">
+    <span class="entry-category">{{ entry.category }}</span>
+    <span class="entry-date">{{ entry.created_at[:10] }}</span>
+  </div>
+  <h1 class="entry-title">{{ entry.title }}</h1>
+  {% if entry.description %}
+  <p class="entry-description">{{ entry.description }}</p>
+  {% endif %}
+  <div class="header-rule"></div>
+</div>
+
+{% if entry.body %}
+<div class="entry-body">
+  {{ body_html | safe }}
+</div>
+{% endif %}
+
+<div class="entry-actions">
+  <a href="{{ url_for('entry_edit', eid=entry.id) }}" class="btn-sm">Edit</a>
+  <form method="POST" action="{{ url_for('entry_delete', eid=entry.id) }}"
+        onsubmit="return confirm('Delete {{ entry.title }}?')">
+    <button type="submit" class="btn-sm btn-danger">Delete</button>
+  </form>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← All entries</a>
+</div>
+{% endblock %}

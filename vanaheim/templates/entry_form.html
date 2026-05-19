@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} — {{ action }} Entry{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h2>{{ action }} entry</h2>
+    <p class="page-sub">{{ 'Edit existing entry' if entry else 'Add a new recipe or guide' }}</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-sm">← Back</a>
+</div>
+
+<div class="form-card form-wide">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-row">
+      <div class="field field-grow">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="{{ entry.title if entry else '' }}" required>
+      </div>
+      <div class="field field-shrink">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="recipe" {{ 'selected' if not entry or entry.category == 'recipe' }}>Recipe</option>
+          <option value="guide"  {{ 'selected' if entry and entry.category == 'guide' }}>Guide</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description"
+             value="{{ entry.description if entry else '' }}"
+             placeholder="Short tagline shown on the index card">
+    </div>
+
+    <div class="field">
+      <label for="image">Image</label>
+      {% if entry and entry.image_path %}
+      <div class="current-img">
+        <img src="{{ entry.image_path }}" alt="Current image">
+        <span class="field-hint">Upload a new file to replace</span>
+      </div>
+      {% endif %}
+      <input type="file" id="image" name="image" accept="image/*">
+      <span class="field-hint">PNG, JPG, GIF, WebP, SVG</span>
+    </div>
+
+    <div class="field">
+      <label for="body">Body <span class="field-hint-inline">(Markdown)</span></label>
+      <textarea id="body" name="body" rows="24">{{ entry.body if entry else '' }}</textarea>
+      <span class="field-hint">Supports ## headings, **bold**, - lists, 1. numbered lists, tables</span>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">{{ action }}</button>
+      <a href="{{ url_for('index') if not entry else url_for('entry', eid=entry.id) }}" class="btn-ghost">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

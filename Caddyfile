@@ -1,17 +1,42 @@
-yggdrasil.home.arpa {
-    handle /midgard* {
+(common) {
+    # Flask static assets (images uploaded via services)
+    handle /midgard/static/* {
         reverse_proxy localhost:5000
     }
+    handle /vanaheim/static/* {
+        reverse_proxy localhost:5003
+    }
 
-    handle /asgard* {
+    # JSON APIs
+    handle /api/realms* {
+        reverse_proxy localhost:5000
+    }
+    handle /api/asgard* {
         reverse_proxy localhost:5001
     }
-
-    handle /svartalheim* {
+    handle /api/vanaheim* {
+        reverse_proxy localhost:5003
+    }
+    handle /api/svartalfheim* {
         reverse_proxy localhost:5002
     }
-
-    handle {
-        redir /midgard permanent
+    handle /api/bifrost* {
+        reverse_proxy localhost:5004
     }
+    handle /api/niflheim* {
+        reverse_proxy localhost:5005
+    }
+
+    # React SPA — dev (vite) or prod (built dist)
+    handle {
+        reverse_proxy localhost:5173
+    }
+}
+
+yggdrasil.home.arpa {
+    import common
+}
+
+localhost {
+    import common
 }
